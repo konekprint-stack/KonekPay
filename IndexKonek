@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagos y Transferencias | Konek Print & Tech</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background: #0b1120;
+      color: #f8fafc;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    h1 { font-size: 20px; margin: 10px 0 4px; }
+    p.sub { color: #94a3b8; font-size: 13px; margin: 0; }
+    .option-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .option-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tag-free {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+    .bank-info { font-size: 13px; color: #cbd5e1; margin-bottom: 10px; line-height: 1.4; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-copy { background: #38bdf8; color: #0f172a; margin-bottom: 8px; }
+    .btn-wa { background: #22c55e; color: #052e16; }
+    .btn-mp { background: #009ee3; color: #ffffff; }
+    .btn-pp { background: #003087; color: #ffffff; border: 1px solid #0079c1; }
+    .note {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 8px;
+      line-height: 1.35;
+    }
+    .footer { text-align: center; font-size: 11px; color: #64748b; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <span class="badge">KONEKTAG PAY ⚡</span>
+    <h1>Konek Print & Tech</h1>
+    <p class="sub">Elige tu método de pago preferido</p>
+  </div>
+
+  <!-- OPCIÓN 1: TRANSFERENCIA + WHATSAPP -->
+  <div class="option-box">
+    <div class="option-title">
+      <span>1. Transferencia Bancaria (SPEI)</span>
+      <span class="tag-free">Sin comisiones</span>
+    </div>
+    <div class="bank-info">
+      <strong>Banco:</strong> BBVA / Nu (Tu Banco)<br>
+      <strong>Titular:</strong> Tu Nombre o Negocio<br>
+      <strong>CLABE:</strong> <span id="clabeText">012180015000000000</span>
+    </div>
+    <button class="btn btn-copy" id="copyBtn" onclick="copiarClabe()">📋 Copiar CLABE Interbancaria</button>
+    <a class="btn btn-wa" href="https://wa.me/525585547950?text=Hola%2C%20te%20comparto%20mi%20comprobante%20de%20transferencia%20%F0%9F%A7%BE" target="_blank">
+      💬 Enviar comprobante por WhatsApp
+    </a>
+  </div>
+
+  <!-- OPCIÓN 2: MERCADO PAGO / CLIP -->
+  <div class="option-box">
+    <div class="option-title">
+      <span>2. Mercado Pago / Tarjetas</span>
+    </div>
+    <a class="btn btn-mp" href="https://mpago.la/TU_LINK_ABIERTO" target="_blank">
+      💳 Pagar con Mercado Pago
+    </a>
+    <p class="note">
+      ℹ️ Si tienes la app de <strong>Mercado Pago</strong>, se abrirá directo para pagar con tu saldo, tarjetas guardadas o Mercado Crédito.
+    </p>
+  </div>
+
+  <!-- OPCIÓN 3: PAYPAL -->
+  <div class="option-box">
+    <div class="option-title">
+      <span>3. Conexión directa PayPal</span>
+    </div>
+    <a class="btn btn-pp" href="https://paypal.me/TU_USUARIO_PAYPAL" target="_blank">
+      🅿️ Pagar con mi cuenta PayPal
+    </a>
+    <p class="note">
+      ℹ️ Inicia sesión en tu cuenta PayPal, escribe el monto y autoriza de forma segura.
+    </p>
+  </div>
+
+  <div class="footer">Tecnología KonekTag • Un toque lo cambia todo</div>
+</div>
+
+<script>
+  function copiarClabe() {
+    const clabe = document.getElementById("clabeText").innerText;
+    navigator.clipboard.writeText(clabe).then(() => {
+      const btn = document.getElementById("copyBtn");
+      btn.innerText = "✅ ¡CLABE Copiada! Pégala en tu banco";
+      btn.style.background = "#4ade80";
+      setTimeout(() => {
+        btn.innerText = "📋 Copiar CLABE Interbancaria";
+        btn.style.background = "#38bdf8";
+      }, 3000);
+    });
+  }
+</script>
+
+</body>
+</html>
